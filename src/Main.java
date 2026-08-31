@@ -25,12 +25,12 @@ public class Main {
 
                 // Echo Utility
                 case "echo" -> {
-                    Builtin.echo(arguments);
+                    Built_In.echo(arguments);
                 }
 
                 // Type Utility
                 case "type" -> {
-                    Builtin.type(tokens[1]);
+                    Built_In.type(tokens[1]);
                 }
                  
                 default -> {

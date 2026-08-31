@@ -1,6 +1,6 @@
 import java.util.Map;
 
-public class Builtin {
+public class Built_In {
 
     // Prints each argument to cli
     public static void echo(String[] args){
