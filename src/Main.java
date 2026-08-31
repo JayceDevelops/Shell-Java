@@ -5,12 +5,13 @@ public class Main {
     @SuppressWarnings({"StringEquality", "ConvertToTryWithResources"})
     public static void main(String[] args) throws Exception {
 
+        // Builtin Functions Mapping
         Map<String, String> builtinMap = Map.of(
             "echo", "builtin",
             "exit", "builtin",
             "type", "builtin"
         );
-        
+
         Scanner scanner = new Scanner(System.in);
         String command = "";
 
@@ -35,6 +36,7 @@ public class Main {
             // Built-In Functions
             switch(tokens[0]){
 
+                // Echo Utility
                 case "echo" -> {
                     for (int i = 0; i < arguments.length; i++){
                         if (i < arguments.length - 1){
@@ -46,6 +48,7 @@ public class Main {
                     }
                 }
 
+                // Type Utility
                 case "type" -> {
                     if (builtinMap.containsKey(tokens[1])){
                         System.out.println(tokens[1] + " is a shell builtin");
