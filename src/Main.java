@@ -1,31 +1,18 @@
-import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
     @SuppressWarnings({"StringEquality", "ConvertToTryWithResources"})
     public static void main(String[] args) throws Exception {
 
-        // Builtin Functions Mapping
-        Map<String, String> builtinMap = Map.of(
-            "echo", "builtin",
-            "exit", "builtin",
-            "type", "builtin"
-        );
-
         Scanner scanner = new Scanner(System.in);
-        String command = "";
 
-        while(!"exit".equals(command)){
+        System.out.print("$ ");
+        String input = scanner.nextLine();
 
-            System.out.print("$ ");
-            command = scanner.nextLine();
+        while(!"exit".equals(input)){
 
-            if ("exit".equals(command)){
-                break;
-            }
-
-            // Turns command into a tokens; tokens[0] = utility, tokens[1 - length] = arguments
-            String[] tokens = command.split(" ");
+            // Tokenization of command
+            String[] tokens = input.split(" ");
 
             // Retrieves arguments
             String[] arguments = new String[tokens.length - 1];
@@ -38,30 +25,21 @@ public class Main {
 
                 // Echo Utility
                 case "echo" -> {
-                    for (int i = 0; i < arguments.length; i++){
-                        if (i < arguments.length - 1){
-                            System.out.print(arguments[i] + " ");
-                        }
-                        else {
-                            System.out.println(arguments[i]);
-                        }
-                    }
+                    Builtin.echo(arguments);
                 }
 
                 // Type Utility
                 case "type" -> {
-                    if (builtinMap.containsKey(tokens[1])){
-                        System.out.println(tokens[1] + " is a shell builtin");
-                    }
-                    else {
-                        System.out.println(tokens[1] + ": not found");
-                    }
+                    Builtin.type(tokens[1]);
                 }
                  
                 default -> {
                     System.out.println(tokens[0] + ": command not found");
                 }
             }
+
+            System.out.print("$ ");
+            input = scanner.nextLine();
             
         }
         scanner.close();
