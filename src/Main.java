@@ -1,11 +1,16 @@
-import java.util.Arrays;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
     @SuppressWarnings({"StringEquality", "ConvertToTryWithResources"})
     public static void main(String[] args) throws Exception {
 
-        String[] builtin = {"echo", "exit", "type"};
+        Map<String, String> builtinMap = Map.of(
+            "echo", "builtin",
+            "exit", "builtin",
+            "type", "builtin"
+        );
+        
         Scanner scanner = new Scanner(System.in);
         String command = "";
 
@@ -42,7 +47,7 @@ public class Main {
                 }
 
                 case "type" -> {
-                    if (Arrays.asList(builtin).contains(arguments[0])){
+                    if (builtinMap.containsKey(tokens[1])){
                         System.out.println(tokens[1] + " is a shell builtin");
                     }
                     else {
