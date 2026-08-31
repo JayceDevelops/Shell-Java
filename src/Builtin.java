@@ -2,6 +2,7 @@ import java.util.Map;
 
 public class Builtin {
 
+    // Prints each argument to cli
     public static void echo(String[] args){
         for (int i = 0; i < args.length; i++){
             if (i < args.length - 1){
@@ -13,6 +14,7 @@ public class Builtin {
         }
     }
 
+    // Returns if the utility is builtin or not
     public static void type(String token){
 
         Map<String, String> builtinMap = Map.of(
