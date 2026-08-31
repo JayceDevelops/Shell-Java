@@ -1,9 +1,11 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
     @SuppressWarnings({"StringEquality", "ConvertToTryWithResources"})
     public static void main(String[] args) throws Exception {
 
+        String[] builtin = {"echo", "exit", "type"};
         Scanner scanner = new Scanner(System.in);
         String command = "";
 
@@ -25,23 +27,35 @@ public class Main {
                 arguments[i] = tokens[i + 1];
             }
 
-            // builtin echo command
-            if ("echo".equals(tokens[0])){
-                for (int i = 0; i < arguments.length; i++){
-                    if (i < arguments.length - 1){
-                        System.out.print(arguments[i] + " ");
-                    }
-                    else {
-                        System.out.println(arguments[i]);
+            // Built-In Functions
+            switch(tokens[0]){
+
+                case "echo" -> {
+                    for (int i = 0; i < arguments.length; i++){
+                        if (i < arguments.length - 1){
+                            System.out.print(arguments[i] + " ");
+                        }
+                        else {
+                            System.out.println(arguments[i]);
+                        }
                     }
                 }
-            }
-            else {
-                System.out.println(command + ": command not found");
+
+                case "type" -> {
+                    if (Arrays.asList(builtin).contains(arguments[0])){
+                        System.out.println(tokens[1] + " is a shell builtin");
+                    }
+                    else {
+                        System.out.println(tokens[1] + ": not found");
+                    }
+                }
+                 
+                default -> {
+                    System.out.println(tokens[0] + ": command not found");
+                }
             }
             
         }
-
         scanner.close();
     }
 }
